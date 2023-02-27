@@ -17,7 +17,7 @@ const App = () => {
     const searchMovie = async (title) => {
         const response = await fetch(`${API_URL}&s=${title}`);
         const data = await response.json();
-        //console.log(data.Search);
+        console.log(data.Search);
         //assigned the data.seearch to the setMovies
         setMovies(data.Search);
     }
@@ -36,17 +36,16 @@ const App = () => {
             <input 
                 placeholder='search for movies'
                 value={searchTerm}
-                onChange={(e)=>{ setSearchTerm(e.target.value)}}
+                onChange={(e)=> setSearchTerm(e.target.value)}
             />
             <img src={SearchIcon} alt="Search movies" 
-                 onClick={()=>{setMovies(searchTerm)}}/>
+                 onClick={()=> searchMovie(searchTerm)}/>
             </div>
             {
-                movies.length > 0 ?
+                movies?.length > 0 ?
                 (
                     <div className='container'>
-                        {
-                            movies.map((movie) => (
+                        {movies.map((movie) => (
                                 <MovieCard movie={movie} />
                             ))
                         }
